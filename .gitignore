@@ -1,0 +1,18 @@
+
+# Environnement
+.env
+
+# IDE
+.idea/
+.vscode/
+
+# OS
+.DS_Store
+
+# Logs
+logs-projects/
+!logs-projects/.gitkeep
+
+# Volumes
+volumes/
+!volumes/.gitkeep

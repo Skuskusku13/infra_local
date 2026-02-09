@@ -1,0 +1,25 @@
+networks:
+  nginx:
+    external: true
+
+
+services:
+  ###################################
+  ######## LOGROTATE & CRON #########
+  ###################################
+
+  logrotate:
+    container_name: 'logrotate'
+    env_file:
+      - ../.env
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: development
+    image: logrotate:development
+    working_dir: /var/log/docker-services/
+    restart: unless-stopped
+    volumes:
+      - ${PATH_PROJECTS_LOGS}/:/var/log/docker-services/
+    networks:
+      - nginx

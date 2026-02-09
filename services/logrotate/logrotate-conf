@@ -1,0 +1,24 @@
+/var/log/docker-services/*/*.log {
+    daily
+    missingok
+    rotate 7
+    notifempty
+    compress
+    delaycompress
+    create 640 root root
+    sharedscripts
+    maxage 7
+    dateext
+    dateformat -%Y-%m-%d
+    copytruncate
+    prerotate
+        if [ -d /etc/logrotate.d/httpd-prerotate ]; then
+            run-parts /etc/logrotate.d/httpd-prerotate
+        fi
+    endscript
+    postrotate
+        if pgrep -f '^/usr/sbin/apache2' > /dev/null; then
+            apache2ctl graceful
+        fi
+    endscript
+}

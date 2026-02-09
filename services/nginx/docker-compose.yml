@@ -1,0 +1,39 @@
+networks:
+  nginx:
+    name: nginx
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.26.0.0/16
+
+
+services:
+  ###################################
+  ######### REVERSE-PROXY ###########
+  ###################################
+
+  nginx-proxy:
+    container_name: "nginx-proxy"
+    image: nginxproxy/nginx-proxy:alpine
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    env_file:
+      - ../.env
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+
+      - ${PATH_DATA}/data/nginx/certs:/etc/nginx/certs:ro
+      - ${PATH_DATA}/data/nginx/conf.d:/etc/nginx/conf.d
+      - ${PATH_DATA}/data/nginx/conf.d/add.conf:/etc/nginx/conf.d/add.conf:ro
+      - ${PATH_DATA}/data/nginx/dhparam:/etc/nginx/dhparam:rw
+      - ${PATH_DATA}/data/nginx/vhost.d:/etc/nginx/vhost.d
+      - ${PATH_DATA}/data/nginx/acme/:/etc/nginx/acmecerts
+
+      - ${PATH_PROJECTS_LOGS}/nginx:/var/log/nginx/:rw
+    environment:
+      TRUST_DOWNSTREAM_PROXY: true
+      HTTPS_METHOD: noredirect
+    networks:
+      - nginx
