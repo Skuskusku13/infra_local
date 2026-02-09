@@ -16,3 +16,7 @@ logs-projects/
 # Volumes
 volumes/
 !volumes/.gitkeep
+
+# Nginx
+/data/nginx/dhparam/dhparam.pem
+/data/nginx/conf.d/default.conf

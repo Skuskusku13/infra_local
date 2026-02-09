@@ -19,17 +19,15 @@ services:
     restart: unless-stopped
     ports:
       - "80:80"
-    env_file:
-      - ../.env
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
 
-      - ${PATH_DATA}/data/nginx/certs:/etc/nginx/certs:ro
-      - ${PATH_DATA}/data/nginx/conf.d:/etc/nginx/conf.d
-      - ${PATH_DATA}/data/nginx/conf.d/add.conf:/etc/nginx/conf.d/add.conf:ro
-      - ${PATH_DATA}/data/nginx/dhparam:/etc/nginx/dhparam:rw
-      - ${PATH_DATA}/data/nginx/vhost.d:/etc/nginx/vhost.d
-      - ${PATH_DATA}/data/nginx/acme/:/etc/nginx/acmecerts
+      - ${PATH_DATA}/nginx/certs:/etc/nginx/certs:ro
+      - ${PATH_DATA}/nginx/conf.d:/etc/nginx/conf.d
+      - ${PATH_DATA}/nginx/conf.d/add.conf:/etc/nginx/conf.d/add.conf:ro
+      - ${PATH_DATA}/nginx/dhparam:/etc/nginx/dhparam:rw
+      - ${PATH_DATA}/nginx/vhost.d:/etc/nginx/vhost.d
+      - ${PATH_DATA}/nginx/acme/:/etc/nginx/acmecerts
 
       - ${PATH_PROJECTS_LOGS}/nginx:/var/log/nginx/:rw
     environment:

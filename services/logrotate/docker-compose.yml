@@ -10,10 +10,8 @@ services:
 
   logrotate:
     container_name: 'logrotate'
-    env_file:
-      - ../.env
     build:
-      context: .
+      context: logrotate/
       dockerfile: Dockerfile
       target: development
     image: logrotate:development
