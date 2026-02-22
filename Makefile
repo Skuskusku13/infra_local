@@ -1,4 +1,8 @@
-COMPOSE_FILES := -f nginx/docker-compose.yml -f mariadb/docker-compose.yml -f logrotate/docker-compose.yml
+COMPOSE_FILES := -f nginx/docker-compose.yml \
+	-f mariadb/docker-compose.yml \
+	-f logrotate/docker-compose.yml \
+	-f prometheus-grafana/docker-compose.yml
+
 PROJECT_NAME := infra_local
 
 .PHONY: build up down logs help
@@ -22,5 +26,3 @@ down:
 
 logs:
 	cd services && docker compose --project-directory . -p $(PROJECT_NAME) $(COMPOSE_FILES) logs -f
-
-
