@@ -1,7 +1,6 @@
 COMPOSE_FILES := -f nginx/docker-compose.yml \
 	-f mariadb/docker-compose.yml \
-	-f logrotate/docker-compose.yml \
-	-f prometheus-grafana/docker-compose.yml
+	-f logrotate/docker-compose.yml
 
 PROJECT_NAME := infra_local
 
