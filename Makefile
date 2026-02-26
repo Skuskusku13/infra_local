@@ -1,6 +1,8 @@
 COMPOSE_FILES := -f nginx/docker-compose.yml \
 	-f mariadb/docker-compose.yml \
-	-f logrotate/docker-compose.yml
+	-f logrotate/docker-compose.yml \
+	-f it-tools/docker-compose.yml \
+	-f bentopdf/docker-compose.yml
 
 PROJECT_NAME := infra_local
 
